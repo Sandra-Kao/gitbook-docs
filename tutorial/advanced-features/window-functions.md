@@ -58,7 +58,7 @@ FROM empsalary;
 
 我們已經瞭解如果次序不重要的話， ORDER BY 可以被省略；且如果所有的資料列都只區分成一組的話，其實 PARITION BY 也可以省略。
 
-還有另一個窗函數相關的重要概念：對於每一個資料列來說，它會在分組中還有個分組，另稱作窗框（window frame），有一些窗函數只對窗框裡的資料列進行處理，而不是整個分組。預設的情況是，如果 ORDER BY 被指定了，以 ORDER BY 排序後，那麼窗框的範圍就是從分組的第一列到該列為止，而在那之後資料列的值都會相同。當 ORDER BY 被省略的時候，預設窗框的範圍就是整個分組( 有一些選項可以透過其他方式定義 window frame，但本文並不會涵蓋它們。有關詳細資訊，請參閱[第 4.2.8 節](../../the-sql-language/sql-syntax/value-expressions.md#4-2-8-chuang-han-shu-hu-jiao)。)。下面是使用 sum 的例子：
+還有另一個窗函數相關的重要概念：對於每一個資料列來說，它會在分組中還有個分組，另稱作窗框（window frame），有一些窗函數只對窗框裡的資料列進行處理，而不是整個分組。預設的情況是，如果 ORDER BY 被指定了，以 ORDER BY 排序後，那麼窗框的範圍就是從分組的第一列一直累計到執行窗口函數時所處的那一行為止(，窗口函數的計算是一行一行進行的)，而在那之後資料列的值都會相同。當 ORDER BY 被省略的時候，預設窗框的範圍就是整個分組( 有一些選項可以透過其他方式定義 window frame，但本文並不會涵蓋它們。有關詳細資訊，請參閱[第 4.2.8 節](../../the-sql-language/sql-syntax/value-expressions.md#4-2-8-chuang-han-shu-hu-jiao)。)。下面是使用 sum 的例子：
 
 ```
 SELECT salary, sum(salary) OVER () FROM empsalary;
